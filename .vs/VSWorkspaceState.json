@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src"
   ],
-  "SelectedNode": "\\C:\\Users\\DeimoS\\Desktop\\My_Chat\\client",
+  "SelectedNode": "\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }
