@@ -69,8 +69,7 @@
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
   display: flex;
   flex-wrap: wrap;
-  resize: none;
-  overflow: auto;
+  /* overflow:hidden; */
   max-height: 150px;
 }
 .chat-input-textarea:focus {
@@ -96,7 +95,9 @@
 
 .chat-log {
   text-align: left;
-  
+  overflow: auto;
+  max-height: 750px; /* set a maximum height that suits your needs */
+  overflow-y: auto; /* set overflow to auto to enable vertical scrolling */
 }
 
 .chat-message.chatgpt {

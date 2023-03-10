@@ -1,13 +1,14 @@
 import "./App.css";
 import "./normal.css";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   useEffect(() => {
     getEngines();
   }, []);
 
+  const chatLogRef = useRef(null);
   const [input, setInput] = useState("");
   const [models, setModels] = useState([]);
   const [currentModel, setCurrentModel] = useState("ada");
@@ -25,6 +26,14 @@ function App() {
   // clear chats
   function clearChat() {
     setChatLog([]);
+  }
+  useEffect(() => {
+    chatLogRef.current.scrollTop = chatLogRef.current.scrollHeight;
+  }, [chatLog]);
+
+  function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = 25 + element.scrollHeight + "px";
   }
 
   const getEngines = () => {
@@ -81,23 +90,27 @@ function App() {
           </select>
         </div>
       </aside>
-      <section className="chatbox">
-        <div className="chat-log">
+      <div className="chatbox">
+        <div className="chat-log" ref={chatLogRef}>
           {chatLog.map((message, index) => (
             <ChatMessage key={index} message={message} />
           ))}
         </div>
         <div className="chat-input-holder">
           <form onSubmit={handleSubmit}>
-            <input
+            <textarea
               rows="1"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                textAreaAdjust(e.target);
+              }}
               className="chat-input-textarea"
-            ></input>
+            ></textarea>
+            <button type="submit">Send</button>
           </form>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
